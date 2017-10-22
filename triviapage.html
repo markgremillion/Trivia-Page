@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<html lang="en-us">
+
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+body{
+  background-color:blue;
+  color: white;
+}
+button{
+  text-align: center;
+}
+#container{
+  text-align: center;
+}
+#insideContainer{
+  background-color: orange;
+}
+
+
+    </style>
+
+  </head>
+
+  <body>
+<div id="container">
+  <h1 id ="title">Trivia Game</h1>
+  <div id ="insideContainer">
+    <button id="start">Start</button>
+  </div>
+</div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+$("#start").on("click", function(){
+  game.start();
+});
+
+var questions=[{
+	question: "What is the largest body of water?",
+	choices: ["Pacific", "Atlantic", "Indian", "Arctic"],
+	correctAnswer: "Pacific"
+}	,	{
+	question: "What did the Romans use to dye their hair?",
+	choices : ["Bleech", "Blood", "bugs", "Bird Poop"],
+	correctAnswer: "Bird Poop"
+}, {
+	question: "What atmosphic gas is the most prevalent",
+	choices : ["Oxygen", "Nitrogen", "Hydrogen"],
+	correctAnswer: "Nitrogen"
+},
+{
+  question : "The average four year old askes how many questions a day?",
+  choices:  ["100", "57", "200","400"],
+  correctAnswer: "400"
+}
+];
+
+
+var game = {
+  correct: 0,
+  incorrect: 0,
+  counter: 10, 
+  countdown : function(){
+    game.counter--;
+    $("#counter").html(game.counter);
+    if (game.counter == 0 ){
+      console.log ("Time is up");
+      game.done();
+    }
+  },
+
+  start : function(){
+    timer = setInterval(game.countdown, 1000);
+    $("#insideContainer").prepend('<h2>Time Remaining : <span id= "counter">120</span> Seconds </h2>');
+    $("#start").remove();
+    for (var i = 0; i < questions.length; i++) {
+      $("#insideContainer").append('<h2>' + questions[i].question + '</h2>')
+       for (var j = 0; j < questions[i].choices.length; j++) {
+         $("#insideContainer").append("<input type= 'radio' name= 'question-" + i +"  'value='" + questions[i].choices[j]+"'>" + questions[i].choices[j]);}
+                               }
+                    }   
+       
+           
+
+
+           }
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+// tried to get this function to work, to put score and figure out if you scored right or not, but every time I used it, it would say that the function done isn't definied, and it would make the entire program stop working, thats why I didn't include it
+ // done: function(){
+            $.each($('input[name= "question-1]":checked'), function(){
+            if ($(this).val()==questions[1].correctAnswer){
+              game.correct++;
+            }
+            else{
+              game.incorrect++;
+              }      
